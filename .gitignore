@@ -1,0 +1,22 @@
+# Dados gerados (fictícios, mas reproduzíveis pelo gerador)
+dados-ficticios/*
+!dados-ficticios/.gitkeep
+
+# Nunca versionar planilhas, exports ou dados de terceiros
+*.csv
+*.xlsx
+*.xls
+*.json
+*.env
+.env
+
+# Material de estudo privado (aulas, manuais e anotações de terceiros)
+material-privado/
+*.docx
+
+# Python e sistema
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+Thumbs.db
