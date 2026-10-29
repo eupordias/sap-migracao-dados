@@ -38,10 +38,18 @@ PRODUTOS = ["Arroz", "Feijao", "Detergente", "Sabao em po", "Refrigerante",
             "Cafe torrado", "Acucar", "Oleo de soja"]
 
 defeitos = {}
+# Defeitos da linha em construcao. Cada linha guarda os seus, para que uma
+# copia duplicada conte de novo os defeitos da linha original no gabarito.
+linha_atual = []
 
 
 def marca(nome):
-    defeitos[nome] = defeitos.get(nome, 0) + 1
+    linha_atual.append(nome)
+
+
+def conta(marcas):
+    for nome in marcas:
+        defeitos[nome] = defeitos.get(nome, 0) + 1
 
 
 def digitos(n):
@@ -120,14 +128,20 @@ def digits_fmt(n, pj=False):
 
 
 def gerar_clientes(total=2000):
-    linhas = [cliente(i) for i in range(1, total + 1)]
+    linhas, marcas = [], []
+    for i in range(1, total + 1):
+        linha_atual.clear()
+        linhas.append(cliente(i))
+        marcas.append(list(linha_atual))
+    for m in marcas:
+        conta(m)
     duplicados = random.sample(range(len(linhas)), int(total * 0.06))
     prox = total + 1
     for idx in duplicados:
         copia = list(linhas[idx])
         copia[0] = f"CLI-{prox:06d}"
         prox += 1
-        marca("cliente_duplicado")
+        conta(marcas[idx] + ["cliente_duplicado"])
         linhas.append(copia)
     random.shuffle(linhas)
     with open(os.path.join(PASTA, "clientes_legado.csv"), "w", newline="", encoding="utf-8") as f:
@@ -138,8 +152,9 @@ def gerar_clientes(total=2000):
 
 
 def gerar_materiais(total=800):
-    linhas = []
+    linhas, marcas = [], []
     for i in range(1, total + 1):
+        linha_atual.clear()
         desc = f"{random.choice(PRODUTOS)} {random.choice(['1kg', '500g', '2L', 'pacote', 'caixa 12un'])}"
         un = random.choice(UNIDADES_OK)
         ncm = digitos(8)
@@ -172,13 +187,16 @@ def gerar_materiais(total=800):
             marca("ativo_fora_do_padrao")
             ativo = random.choice(["1", "0", "sim", "nao"])
         linhas.append([f"MAT-{i:05d}", desc, un, ncm, custo, random.choice(GRUPOS), ativo])
+        marcas.append(list(linha_atual))
+    for m in marcas:
+        conta(m)
     duplicados = random.sample(range(len(linhas)), int(total * 0.04))
     prox = total + 1
     for idx in duplicados:
         copia = list(linhas[idx])
         copia[0] = f"MAT-{prox:05d}"
         prox += 1
-        marca("material_duplicado")
+        conta(marcas[idx] + ["material_duplicado"])
         linhas.append(copia)
     random.shuffle(linhas)
     with open(os.path.join(PASTA, "materiais_legado.csv"), "w", newline="", encoding="utf-8") as f:

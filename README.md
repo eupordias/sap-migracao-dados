@@ -72,10 +72,13 @@ sap-migracao-dados/
 │   ├── plano-de-estudo.md     plano de 8 semanas
 │   ├── escopo-e-abordagem.md  cenário, objetos e decisão de abordagem
 │   ├── mapeamento.md          legado para destino, com status de confirmação
+│   ├── defeitos.md            registro de defeitos, com causa e correção (a partir da semana 3)
 │   └── glossario.md           termos de migração de dados SAP
 ├── src/
 │   └── gerar_dados_ficticios.py   gerador dos dados legados fictícios
-├── sql/                       perfilamento, staging, limpeza e reconciliação
+├── tests/
+│   └── test_gerador.py        confere se o gabarito bate com os arquivos gerados
+├── sql/                       01_perfilamento.sql a 04_reconciliacao.sql
 └── dados-ficticios/           saída do gerador (não versionada)
 ```
 
@@ -89,7 +92,9 @@ cd sap-migracao-dados
 python src/gerar_dados_ficticios.py
 ```
 
-Saída na pasta `dados-ficticios/`: `clientes_legado.csv`, `materiais_legado.csv` e `gabarito_defeitos.csv` (a contagem dos defeitos injetados; só abro depois de terminar o perfilamento).
+Saída na pasta `dados-ficticios/`: `clientes_legado.csv`, `materiais_legado.csv` e `gabarito_defeitos.csv` (a contagem dos defeitos presentes nos arquivos, incluindo os que vieram nas linhas duplicadas; só abro depois de terminar o perfilamento).
+
+Para conferir o gerador: `python -m unittest discover -s tests`.
 
 Para carregar no PostgreSQL, todas as colunas entram como texto, de propósito: se eu converter tipos na carga, o defeito desaparece e eu deixo de vê-lo.
 
