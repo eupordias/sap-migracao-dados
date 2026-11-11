@@ -10,7 +10,7 @@
 | **O quê** | Simulação de uma migração de dados mestres (clientes e materiais) de um sistema legado para um modelo de destino pensado para o S/4HANA |
 | **Por quê** | Entrar no mercado SAP pela área de migração de dados, provando o aprendizado com entregas datadas e públicas |
 | **Prazo** | 28/10/2026 a 22/12/2026: 8 semanas, 2 horas por noite |
-| **Status** | Semana 1 de 8: fundamentos de SAP e preparação do projeto |
+| **Status** | Semana 3 de 8 pelo calendário. Feito: repositório, gerador de dados fictícios com teste, escopo e mapeamento iniciais. As semanas 1 e 2 estão sendo reorganizadas; o log registra só o que foi concluído |
 | **Ferramentas** | Python, SQL, PostgreSQL, Git |
 
 **Summary (EN):** study project simulating a master data migration (customers and materials) from a legacy system to an S/4HANA-oriented target model, using fictional data only. I am a full stack developer and data protection officer (DPO) moving into SAP data migration. The plan runs from 2026-10-28 to 2026-12-22 and every step is committed with a date. This is not real SAP project experience.
@@ -53,9 +53,9 @@ O plano completo, com datas, está em [`docs/plano-de-estudo.md`](docs/plano-de-
 
 | Semana | Datas | Foco | Status |
 |---|---|---|---|
-| 1 | 28/10 a 03/11 | Fundamentos de SAP, glossário e fluxo do projeto | Em andamento |
-| 2 | 04/11 a 10/11 | Dados fictícios, perfilamento e mapeamento | Pendente |
-| 3 | 11/11 a 17/11 | Staging, limpeza e primeira carga de ensaio | Pendente |
+| 1 | 28/10 a 03/11 | Fundamentos de SAP, glossário e fluxo do projeto | Parcial: repositório e glossário inicial; resumo e diagrama pendentes |
+| 2 | 04/11 a 10/11 | Dados fictícios, perfilamento e mapeamento | Parcial: gerador de dados e mapeamento inicial; perfilamento pendente |
+| 3 | 11/11 a 17/11 | Staging, limpeza e primeira carga de ensaio | Em andamento |
 | 4 | 18/11 a 24/11 | Segunda carga, objeto material e reconciliação | Pendente |
 | 5 | 25/11 a 01/12 | Ferramentas de migração, cutover e certificação | Pendente |
 | 6 | 02/12 a 08/12 | Painel de reconciliação e demonstração no ar | Pendente |
